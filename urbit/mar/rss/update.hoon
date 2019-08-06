@@ -3,9 +3,9 @@
 /?  309
 ::
 /-  hall
-/+  %APPNAME%, hall-json
+/+  rss, hall-json
 ::
-|_  upd=update:%APPNAME%
+|_  upd=update:rss
 ++  grow
   |%
   ++  json
@@ -91,6 +91,6 @@
 ::
 ++  grab
   |%
-  ++  noun  update:%APPNAME%
+  ++  noun  update:rss
   --
 --

@@ -17,8 +17,8 @@
 ::
 +$  diff
   $%  [%hall-rumor rumor:hall]
-      [%%APPNAME%-update update]
-      [%%APPNAME%-config streams]
+      [%rss-update update]
+      [%rss-config streams]
       [%json json]
   ==
 ::
@@ -86,7 +86,7 @@
   |=  str=streams
   =,  enjs:format
   ^-  json
-  %+  frond  %%APPNAME%
+  %+  frond  %rss
   %-  pairs
   :~  
     ::
@@ -119,7 +119,7 @@
   |=  num=(list [circle:hall @ud])
   ^-  json
   =,  enjs:format
-  %+  frond  %%APPNAME%
+  %+  frond  %rss
   %-  pairs
   :~
     ::

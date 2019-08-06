@@ -1,1 +1,4 @@
 node_modules
+dist/
+urbit/app/rss/css
+urbit/app/rss/js

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 export class ConfigReducer {
     reduce(json, state) {
-        let data = _.get(json, '%APPNAME%', false);
+        let data = _.get(json, 'rss', false);
         if (data) {
             state.inbox = data.inbox;
             state.configs = data.configs;

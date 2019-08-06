@@ -1,9 +1,9 @@
 ::
 ::
 /-  hall
-/+  %APPNAME%, hall-json
+/+  rss, hall-json
 ::
-|_  act=action:%APPNAME%
+|_  act=action:rss
 ++  grow
   |%
   ++  tank  !!
@@ -11,10 +11,10 @@
 ::
 ++  grab
   |%
-  ++  noun  action:%APPNAME%
+  ++  noun  action:rss
   ++  json
     |=  jon=^json
-    =<  (parse-%APPNAME%-action jon)
+    =<  (parse-rss-action jon)
     |%
     ::
     ++  hall-action
@@ -46,7 +46,7 @@
           public+(ot add+bo cir+circ ~)
       ==
     ::
-    ++  parse-%APPNAME%-action
+    ++  parse-rss-action
       =,  dejs:format
       %-  of
       :~

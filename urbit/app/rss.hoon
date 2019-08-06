@@ -1,41 +1,41 @@
 /-  hall
-/+  *server, %APPNAME%, hall-json
+/+  *server, rss, hall-json
 /=  index
   /^  octs
   /;  as-octs:mimes:html
-  /:  /===/app/%APPNAME%/index
+  /:  /===/app/rss/index
   /|  /html/
       /~  ~
   ==
 /=  tile-js
   /^  octs
   /;  as-octs:mimes:html
-  /:  /===/app/%APPNAME%/js/tile
+  /:  /===/app/rss/js/tile
   /|  /js/
       /~  ~
   ==
 /=  script
   /^  octs
   /;  as-octs:mimes:html
-  /:  /===/app/%APPNAME%/js/index
+  /:  /===/app/rss/js/index
   /|  /js/
       /~  ~
   ==
 /=  style
   /^  octs
   /;  as-octs:mimes:html
-  /:  /===/app/%APPNAME%/css/index
+  /:  /===/app/rss/css/index
   /|  /css/
       /~  ~
   ==
 :: This iterates over item in the img directory, takes their filenames
 :: at @tas (knots), takes the file as @ (binary) and runs it through the 
 :: png mark.
-/=  %APPNAME%-png
+/=  rss-png
   /^  (map knot @)
-  /:  /===/app/%APPNAME%/img  /_  /png/
+  /:  /===/app/rss/img  /_  /png/
 ::
-=,  %APPNAME%
+=,  rss
 ::
 |_  [bol=bowl:gall sta=state]
 ::
@@ -47,19 +47,19 @@
   |=  old=(unit state)
   ^-  (quip move _this)
   =/  launcha/poke
-    [%launch-action [%%APPNAME% /%APPNAME%tile '/~%APPNAME%/js/tile.js']]
+    [%launch-action [%rss /rsstile '/~rss/js/tile.js']]
   ?~  old
     :_  this
     :~ 
-        :: %connect here tells %eyre to mount at the /~%APPNAME% endpoint.
-        [ost.bol %connect / [~ /'~%APPNAME%'] %%APPNAME%]
-        [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]
+        :: %connect here tells %eyre to mount at the /~rss endpoint.
+        [ost.bol %connect / [~ /'~rss'] %rss]
+        [ost.bol %poke /rss [our.bol %launch] launcha]
     ==
-  :-  [ost.bol %poke /%APPNAME% [our.bol %launch] launcha]~
+  :-  [ost.bol %poke /rss [our.bol %launch] launcha]~
   this(sta u.old)
 ::
 ::
-++  peer-%APPNAME%tile
+++  peer-rsstile
   |=  wir=wire
   ^-  (quip move _this)
   :_  this
@@ -73,25 +73,25 @@
   ^-  (quip move _this)
   [~ this]
 ::
-::  +poke-%APPNAME%: send us an action
+::  +poke-rss: send us an action
 ::
-++  poke-%APPNAME%-action
-  |=  act=action:%APPNAME%
+++  poke-rss-action
+  |=  act=action:rss
   ^-  (quip move _this)
   [~ this] 
 ::
-::  +send-%APPNAME%-update: utility func for sending updates to all our subscribers
+::  +send-rss-update: utility func for sending updates to all our subscribers
 ::
-++  send-%APPNAME%-update
+++  send-rss-update
   |=  [upd=update str=streams]
   ^-  (list move)
   =/  updates/(list move)
     %+  turn  (prey:pubsub:userlib /primary bol)
     |=  [=bone *]
-    [bone %diff %%APPNAME%-update upd]
+    [bone %diff %rss-update upd]
   ::
   =/  tile-updates/(list move)
-    %+  turn  (prey:pubsub:userlib /%APPNAME%tile bol)
+    %+  turn  (prey:pubsub:userlib /rsstile bol)
     |=  [=bone *]
     [bone %diff %json *json]
   ::
@@ -103,7 +103,7 @@
 ::  +lient arms
 ::
 ::
-::  +bound: lient tells us we successfully bound our server to the ~%APPNAME% url
+::  +bound: lient tells us we successfully bound our server to the ~rss url
 ::
 ++  bound
   |=  [wir=wire success=? binding=binding:eyre]
@@ -131,26 +131,26 @@
   ::
   ::  styling
   ::
-      [%'~%APPNAME%' %css %index ~]
+      [%'~rss' %css %index ~]
     :_  this
     [ost.bol %http-response (css-response:app style)]~
   ::
   ::  javascript
   ::
-      [%'~%APPNAME%' %js %index ~]
+      [%'~rss' %js %index ~]
     :_  this
     [ost.bol %http-response (js-response:app script)]~
   ::
   ::  images
   ::
-      [%'~%APPNAME%' %img *]
-    =/  img  (as-octs:mimes:html (~(got by %APPNAME%-png) `@ta`name))
+      [%'~rss' %img *]
+    =/  img  (as-octs:mimes:html (~(got by rss-png) `@ta`name))
     :_  this
     [ost.bol %http-response (png-response:app img)]~
   ::
   ::  inbox page
   ::
-     [%'~%APPNAME%' *]
+     [%'~rss' *]
     :_  this
     [ost.bol %http-response (html-response:app index)]~
   ==

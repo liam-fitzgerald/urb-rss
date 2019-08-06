@@ -1,5 +1,5 @@
 module.exports = {
   URBIT_PIERS: [
-    "%URBITPIER%",
+    "/Users/liamfitzgerald/dev/urbit/zod/home",
   ]
 };
